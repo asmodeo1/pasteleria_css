@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Las tartas de la abuela</title>
+    <style>
+      @font-face {
+        font-family: skincake;
+        src: url(fuentes/Skincake.ttf);  /* Un nombre cualquiera que luego usaremos en otros estilos */
+      }
+      /* Al usar float, los elementos pasan a considerarse fuera de su contenedor, con lo
+      que es casi seguro que vamos a tener problemas con otros. Por ello deberemos
+      aplicar la clase clearfix al contenedor de los productos, que en nuestro caso
+      será un section de clase productos */
+      .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+      /* Quitamos todos los márgenes, espaciado, ponemos la
+      fuente al tamaño "normal" y quitamos las decoraciones */
+      * {
+        margin: 0;
+        padding: 0;
+        font-size: 100%;
+        text-decoration: none;
+      }
+      body {
+        background-color: #f5c7d9;
+      }
+      header {
+        background-color: #d11475;
+        box-shadow: 0px 1px 3px black;
+        /* En este caso suponemos que la imagen de la abuela
+        es decoración, con la que la ponemos de fondo. También podríamos
+        haber pensado que es el logotipo del negocio, con lo que iría como imagen */
+        background-image: url(imagenes/abuela.png);
+        background-repeat: no-repeat; /* que no se repita */
+        background-position: left 20px center; /* 20 píxeles a la izquierda y centrada verticalmente */
+      }
+      header h1 {
+        font-family: skincake; /* El nombre que le dimos anteriormente */
+        font-size: 4rem; /* rem siempre se refiere al tamaño base de la página */
+        color: #edbbb4;
+        text-align: center;
+        padding: 20px;
+        text-shadow: 3px 3px 1px black;
+      }
+      main {
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        /* Como los h2 y la imagen de la pastelería van centradas, lo indicamos en el main */
+        text-align: center;
+      }
+      main h2 {
+        font-size: 1.5rem;
+        color: #d11475;
+        margin: 20px;
+      }
+      .presentacion {
+        border-radius: 50%; /* Mostramos la imagen de la pastelería en una elipse */
+      }
+      .productos {
+        /* Para centrar los productos, centramos primero su contenedor, dádole un ancho
+        y usando margin: auto. Con esto centramos el contenedor */
+        width: 90%;
+        margin: auto;
+        /* Luego, una manera de centrar los productos en el contenedor, es darles un 
+        espaciado derecho e izquierdo igual */
+        padding-left: 10%;
+        padding-right: 10%;
+      }
+      .producto {
+        border-radius: 15px;
+        border: 5px solid #d11475;
+        /* Para poner los productos en fila */
+        float: left;
+        /* Si ocupan un 100% de nada vale ponerlos en línea */
+        width: 40%;
+        /* Como usamos border-radius, la imagen quedará un poco por fuera en esas esquinas,
+        no quedando bien el borde. Con esta propiedad, ocultamos todo lo que quede por fuera */
+        overflow: hidden;
+        margin: 20px;
+      }
+      /* Cambiamos el color del borde cuando el ratón pase sobre el producto */
+      .producto:hover {
+        border: 5px solid #c38780;
+      }
+      /* La mejor manera de que la imagen adapte su tamaño al del contenedor
+        es darle un width del 100% o menos si no queremos todo el ancho.
+        Como tenemos dos imágenes en cada producto, el pastel y el carrito, debemos
+        aplicar este estilo solo a la primera.
+        No valdría poner .producto img:nth-of-type(1), pues con ello nos referimos
+        a la primera imagen hija de un contenedor y la imagen del carrito es hija de una
+        etiqueta a*. Usando > le decimos la que sea hija directa, no nieta como la del
+        carrito *. Algo más sencillo sería darle una clase a la imagen del pastel */      
+      .producto > img:nth-of-type(1) {
+        width: 100%;
+      }
+      .producto h3 {
+        color: #d11475;
+        padding: 5px;
+        border-bottom: 3px dashed #d11475;
+      }
+      .producto p {
+        text-align: right;
+        color: #830202;
+        padding: 5px;
+      }
+      .producto a {
+        /* Para mover la imagen del carrito a la derecha, un modo es convertir el
+        enlace a block, ya que va solo en la línea, con lo que ocupará un 100% del
+        contenedor. Con ello podemos usar luego text-align: right. También
+        podríamos haber metido la imagen en un contenedor de tipo bloque, como un div,
+        y aplicarle a este el text-align: right */        
+        display: block;
+        text-align: right;
+        margin-right: 5px;
+      }
+      footer {
+        background-color: #d11475;
+        color: white;
+        text-align: right;
+        padding: 5px;
+      }
+      footer p {
+        padding: 5px;
+        /* Aunque los navegadores suelen poner en cursiva una etiqueta address, no
+          tiene porque ser así. Con esto nos aseguramos de ello */
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Las tartas de la abuela</h1>
+    </header>
+    <main>
+      <h2>Vendiendo alegría desde 1950</h2>
+      <img class="presentacion" src="imagenes/pasteleria.jpg" alt="foto 1" />
+      <h2>Nuestros productos destacados</h2>
+      <section class="productos clearfix">
+        <section class="producto">
+          <img src="imagenes/tarta_chocolate.jpg" alt="tarta de chocolate" />
+          <h3>Tarta de chocolate</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi,
+            molestiae nisi? Explicabo necessitatibus blanditiis ullam repellat,
+            numquam asperiores vel tempore!
+          </p>
+          <a href=""
+            ><img src="imagenes/carrito.png" alt="Añadir al carrito"
+          /></a>
+        </section>
+        <section class="producto">
+          <img src="imagenes/tarta_chocolate.jpg" alt="tarta de chocolate" />
+          <h3>Tarta de chocolate</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi,
+            molestiae nisi? Explicabo necessitatibus blanditiis ullam repellat,
+            numquam asperiores vel tempore!
+          </p>
+          <a href=""
+            ><img src="imagenes/carrito.png" alt="Añadir al carrito"
+          /></a>
+        </section>
+        <section class="producto">
+          <img src="imagenes/tarta_chocolate.jpg" alt="tarta de chocolate" />
+          <h3>Tarta de chocolate</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi,
+            molestiae nisi? Explicabo necessitatibus blanditiis ullam repellat,
+            numquam asperiores vel tempore!
+          </p>
+          <a href=""
+            ><img src="imagenes/carrito.png" alt="Añadir al carrito"
+          /></a>
+        </section>
+        <section class="producto">
+          <img src="imagenes/tarta_chocolate.jpg" alt="tarta de chocolate" />
+          <h3>Tarta de chocolate</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi,
+            molestiae nisi? Explicabo necessitatibus blanditiis ullam repellat,
+            numquam asperiores vel tempore!
+          </p>
+          <a href=""
+            ><img src="imagenes/carrito.png" alt="Añadir al carrito"
+          /></a>
+        </section>
+      </section>
+    </main>
+    <footer>
+      <address>
+        <p>Las tartas de la abuela</p>
+        <p>Calle Sin número 21</p>
+        <p>36432 - Porteliña</p>
+      </address>
+    </footer>
+  </body>
+</html>
